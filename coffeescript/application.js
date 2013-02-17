@@ -14,7 +14,7 @@
       return this.Freebase.search(query_string, $.proxy(this, '_handleSearchSuccessState'), $.proxy(this, '_handleSearchFailureState'), $.proxy(this, '_handleSearchCompletionState'));
     },
     _handleSearchSuccessState: function(data) {
-      this.Renderer.renderBoxes;
+      this.Renderer.renderBoxes($('#search-results'), data.result);
       return this.Freebase.fetchExtraInformation();
     },
     _handleSearchFailureState: function() {
@@ -28,11 +28,7 @@
   };
 
   $(function() {
-    App.init();
-    return $('#search-results').masonry({
-      itemSelector: '.search-result',
-      columnWidth: 100
-    });
+    return App.init();
   });
 
 }).call(this);

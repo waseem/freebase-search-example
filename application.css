@@ -15,13 +15,13 @@ div#search-results {
 
 div#search-results div.search-result {
   float: left;
-  width: 150px;
   margin: 1%;
   border: 1px solid black;
+  min-width: 130px;
 }
 
 div.search-result span {
-  margin: 35%;
+  margin: 5%;
 }
 
 div.search-result hr {
@@ -30,4 +30,8 @@ div.search-result hr {
 
 div.search-result p {
   margin: 2px;
+}
+
+div.search-result img {
+  padding: 0 0 20px 25%;
 }

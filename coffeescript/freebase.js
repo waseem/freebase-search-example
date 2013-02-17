@@ -2,6 +2,7 @@
 (function() {
 
   App.Freebase = {
+    BASE_IMAGE_URL: 'https://usercontent.googleapis.com/freebase/v1/image',
     search: function(query_string, _done, _fail, _complete) {
       return $.get('https://www.googleapis.com/freebase/v1/search', {
         query: query_string,

@@ -16,7 +16,7 @@ window.App =
     )
 
   _handleSearchSuccessState: (data) ->
-    @Renderer.renderBoxes
+    @Renderer.renderBoxes($('#search-results'), data.result)
     @Freebase.fetchExtraInformation()
 
   _handleSearchFailureState: ->
@@ -33,6 +33,3 @@ window.App =
 
 $ ->
   App.init()
-  $('#search-results').masonry
-    itemSelector: '.search-result'
-    columnWidth: 100
