@@ -1,0 +1,33 @@
+input#search {
+  margin-left: 40%;
+  margin-top: 2%;
+}
+
+hr.ruler {
+  margin-top: 2%;
+}
+
+div#search-results {
+  border: 2px solid gray;
+  margin: 2%;
+  overflow: hidden;
+}
+
+div#search-results div.search-result {
+  float: left;
+  width: 150px;
+  margin: 1%;
+  border: 1px solid black;
+}
+
+div.search-result span {
+  margin: 35%;
+}
+
+div.search-result hr {
+  margin-top: 2%;
+}
+
+div.search-result p {
+  margin: 2px;
+}
