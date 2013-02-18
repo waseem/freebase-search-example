@@ -14,8 +14,16 @@ App.Renderer =
   renderBox: (datum) ->
     $('<div/>',
       'class': 'search-result',
-      html: _.template(@BOX_HTML, { title: datum.name, category: datum.notable?.name, image_src: App.Freebase.BASE_IMAGE_URL + datum.id })
+      html: _.template(@BOX_HTML, { title: datum.name, category: datum.notable?.name, image_src: App.Freebase.BASE_IMAGE_URL + datum.id }),
+      id: datum.id?.replace(/[/]/g, '_')
     )
+
+  renderExtraInformation: ($box, description) ->
+    return unless $box.length
+    return unless description.length
+    $paragraph = $('<p/>', html: description)
+
+    $box.append($paragraph)
 
   _masonify: ($container) ->
     $container.imagesLoaded ->

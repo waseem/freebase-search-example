@@ -3,13 +3,30 @@
 
   App.Freebase = {
     BASE_IMAGE_URL: 'https://usercontent.googleapis.com/freebase/v1/image',
-    search: function(query_string, _done, _fail, _complete) {
+    search: function(query_string, _done, _fail) {
       return $.get('https://www.googleapis.com/freebase/v1/search', {
         query: query_string,
         lang: 'en'
-      }).done(_done).fail(_fail).complete(_complete);
+      }).done(_done).fail(_fail);
     },
-    fetchExtraInformation: function(ids, _done, _fail, _complete) {}
+    fetchExtraInformation: function(data, _done, _fail) {
+      var datum, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = data.length; _i < _len; _i++) {
+        datum = data[_i];
+        if (datum.id != null) {
+          _results.push(this._fetchExtraInformationForNode(datum.id, _done, _fail));
+        }
+      }
+      return _results;
+    },
+    _fetchExtraInformationForNode: function(id, _done, _fail) {
+      var _id;
+      _id = id.replace(/[/]/g, '_');
+      return $.get('https://www.googleapis.com/freebase/v1/text' + id, function(result) {
+        return _done(_id, result.result);
+      });
+    }
   };
 
 }).call(this);

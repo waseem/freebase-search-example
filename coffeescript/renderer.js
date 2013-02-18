@@ -21,15 +21,29 @@
       return this._masonify($container);
     },
     renderBox: function(datum) {
-      var _ref;
+      var _ref, _ref1;
       return $('<div/>', {
         'class': 'search-result',
         html: _.template(this.BOX_HTML, {
           title: datum.name,
           category: (_ref = datum.notable) != null ? _ref.name : void 0,
           image_src: App.Freebase.BASE_IMAGE_URL + datum.id
-        })
+        }),
+        id: (_ref1 = datum.id) != null ? _ref1.replace(/[/]/g, '_') : void 0
       });
+    },
+    renderExtraInformation: function($box, description) {
+      var $paragraph;
+      if (!$box.length) {
+        return;
+      }
+      if (!description.length) {
+        return;
+      }
+      $paragraph = $('<p/>', {
+        html: description
+      });
+      return $box.append($paragraph);
     },
     _masonify: function($container) {
       return $container.imagesLoaded(function() {

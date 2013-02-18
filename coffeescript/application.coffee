@@ -11,18 +11,24 @@ window.App =
   search: (query_string) ->
     @Freebase.search(query_string,
       $.proxy(@, '_handleSearchSuccessState'),
-      $.proxy(@, '_handleSearchFailureState'),
-      $.proxy(@, '_handleSearchCompletionState')
+      $.proxy(@, '_handleSearchFailureState')
     )
 
   _handleSearchSuccessState: (data) ->
     @Renderer.renderBoxes($('#search-results'), data.result)
-    @Freebase.fetchExtraInformation()
+    @Freebase.fetchExtraInformation(data.result,
+      $.proxy(@, '_handleFetchExtraInformationSuccessState'),
+      $.proxy(@, '_handleFetchExtraInformationFailureState')
+    )
 
   _handleSearchFailureState: ->
     console.log('Fffffuuuu')
 
-  _handleSearchCompletionState: ->
+  _handleFetchExtraInformationSuccessState: (id, description) ->
+    @Renderer.renderExtraInformation($('div#' + id), description)
+
+  _handleFetchExtraInformationFailureState: ->
+    console.log('Bbbboooooo')
 
   _delayedSearch:(e) ->
     clearTimeout(@TIMER)
