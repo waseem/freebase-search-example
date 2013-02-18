@@ -11,6 +11,13 @@
       return $('#search').keyup($.proxy(this, '_delayedSearch'));
     },
     search: function(query_string) {
+      if (!query_string.length) {
+        return;
+      }
+      if (query_string === this.LAST_QUERY_STRING) {
+        return;
+      }
+      this.LAST_QUERY_STRING = query_string;
       return this.Freebase.search(query_string, $.proxy(this, '_handleSearchSuccessState'), $.proxy(this, '_handleSearchFailureState'));
     },
     _handleSearchSuccessState: function(data) {

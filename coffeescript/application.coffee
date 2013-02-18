@@ -9,6 +9,10 @@ window.App =
     $('#search').keyup($.proxy(@, '_delayedSearch'))
 
   search: (query_string) ->
+    return unless query_string.length
+    return if query_string == @LAST_QUERY_STRING
+    @LAST_QUERY_STRING = query_string
+
     @Freebase.search(query_string,
       $.proxy(@, '_handleSearchSuccessState'),
       $.proxy(@, '_handleSearchFailureState')
